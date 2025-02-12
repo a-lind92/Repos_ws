@@ -1,0 +1,1 @@
+"# Repos_ws"  initgit add README.mdgit commit -m "first commit"git branch -M maingit remote add origin git@github.com:a-lind92/Repos_ws.gitgit push -u origin main
