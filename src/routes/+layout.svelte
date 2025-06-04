@@ -23,20 +23,25 @@
 </script>
 
 <nav>
-	<a href="/" rel="noopener noreferrer">HEM</a>
-</nav>
-<nav>
+	<a href="/" data-sveltekit-reload rel="noopener noreferrer">HEM</a>
+  </nav>
+  
+  <nav>
 	<a href="/photoapp" data-sveltekit-reload>PHOTOAPP</a>
-</nav>
-<nav>
-	<a href="/register" rel="noopener noreferrer">REGISTERRRR</a>
-</nav>
-<nav>
-	<a href="/login" rel="noopener noreferrer">LOGIN</a>
-</nav>
-<nav>
-	<a href="/habit-tracker" rel="noopener noreferrer">HABIT TRACKER</a>
-</nav>
+  </nav>
+  
+  <nav>
+	<a href="/register" data-sveltekit-reload rel="noopener noreferrer">REGISTERRRR</a>
+  </nav>
+  
+  <nav>
+	<a href="/login" data-sveltekit-reload rel="noopener noreferrer">LOGIN</a>
+  </nav>
+  
+  <nav>
+	<a href="/habit-tracker" data-sveltekit-reload rel="noopener noreferrer">HABIT TRACKER</a>
+  </nav>
+  
 <style>
 	:global(body), :global(html){
   margin: 0%;

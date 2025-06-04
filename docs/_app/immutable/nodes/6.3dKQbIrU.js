@@ -1,0 +1,12 @@
+import{s as K,n as O,a as Y}from"../chunks/CMEKqu9_.js";import{S as U,i as Z,d as o,a as j,h as e,b as r,c as t,e as C,j as y,g as q,f as a,s as E}from"../chunks/TXnZck4V.js";function N(J){let d,D,l,p,L="<title>PHOTOAPP</title> <style></style>",H,i,m,V="På denna sida finns det fina bilder",P,s,h,f,k,T,u,v,F,I,g,_,G,M,x,S=`.photos{\r
+      display:flex;\r
+      flex-wrap: wrap;\r
+      max-width: 3000vw;\r
+      align-items:center;\r
+      justify-content:center;\r
+      gap: 20px\r
+    }\r
+    .image-wrapper img{ width: 100%; height: 100%; -o-object-fit: cover; object-fit: cover; border-radius: 10x;}\r
+    .image-wrapper{flex: 0 0 300px; width: 300px; transition: transform 0.3s ease;}\r
+    .image-wrapper:hover { transform: scale(1.05) }\r
+    .image-wrapper:active { transform: scale(0.95);}`;return{c(){d=a("!DOCTYPE"),D=E(),l=a("html"),p=a("head"),p.innerHTML=L,H=E(),i=a("body"),m=a("h1"),m.textContent=V,P=E(),s=a("div"),h=a("div"),f=a("img"),T=E(),u=a("div"),v=a("img"),I=E(),g=a("div"),_=a("img"),M=E(),x=a("style"),x.textContent=S,this.h()},l(n){d=t(n,"!DOCTYPE",{html:!0}),D=C(n),l=t(n,"HTML",{lang:!0});var c=y(l);p=t(c,"HEAD",{"data-svelte-h":!0}),q(p)!=="svelte-1quds49"&&(p.innerHTML=L),H=C(c),i=t(c,"BODY",{});var b=y(i);m=t(b,"H1",{"data-svelte-h":!0}),q(m)!=="svelte-aqr33l"&&(m.textContent=V),P=C(b),s=t(b,"DIV",{class:!0});var w=y(s);h=t(w,"DIV",{class:!0});var A=y(h);f=t(A,"IMG",{src:!0,alt:!0}),A.forEach(o),T=C(w),u=t(w,"DIV",{class:!0});var z=y(u);v=t(z,"IMG",{src:!0,alt:!0}),z.forEach(o),I=C(w),g=t(w,"DIV",{class:!0});var B=y(g);_=t(B,"IMG",{src:!0,alt:!0}),B.forEach(o),w.forEach(o),M=C(b),x=t(b,"STYLE",{"data-svelte-h":!0}),q(x)!=="svelte-1mobfpa"&&(x.textContent=S),b.forEach(o),c.forEach(o),this.h()},h(){r(d,"html",""),Y(f.src,k=Q)||r(f,"src",k),r(f,"alt","Flexbox egenskaper"),r(h,"class","image-wrapper"),Y(v.src,F=R)||r(v,"src",F),r(v,"alt","flexbox egenskaper"),r(u,"class","image-wrapper"),Y(_.src,G=W)||r(_,"src",G),r(_,"alt","flexbox egenskaper"),r(g,"class","image-wrapper"),r(s,"class","photos"),r(l,"lang","sv")},m(n,c){j(n,d,c),j(n,D,c),j(n,l,c),e(l,p),e(l,H),e(l,i),e(i,m),e(i,P),e(i,s),e(s,h),e(h,f),e(s,T),e(s,u),e(u,v),e(s,I),e(s,g),e(g,_),e(i,M),e(i,x)},p:O,i:O,o:O,d(n){n&&(o(d),o(D),o(l))}}}let Q="https://ds055uzetaobb.cloudfront.net/uploads/Jm5EyZc0cU-8-cell.gif",R="https://www.math.union.edu/~dpvc/math/4D/folding/HCube-Folding/HCube-Folding.gif",W="https://i.gifer.com/7ulK.gif";class ee extends U{constructor(d){super(),Z(this,d,null,N,K,{})}}export{ee as component};

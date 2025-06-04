@@ -1,0 +1,200 @@
+import{s as u,n as c}from"../chunks/CMEKqu9_.js";import{S as m,i as h,d as i,a as s,b as o,c as l,e as y,g,f as p,s as C}from"../chunks/TXnZck4V.js";function b(f){let a,r,t,d=`<head><meta charset="UTF-8"/> <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <title>Memory Game</title> <style>/* Basic page setup */
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #f0f0f0;
+      margin: 0;
+      padding: 20px;
+    }
+
+    /* Grid board: 4×4 cards, 10px gap */
+    .game-board {
+      display: grid;
+      grid-template-columns: repeat(4, 100px);
+      grid-template-rows: repeat(4, 100px);
+      gap: 10px;
+    }
+
+    /* Each card has perspective for 3D flip */
+    .card {
+      perspective: 600px;
+      cursor: pointer;
+    }
+
+    /* Inner wrapper that flips */
+    .card-inner {
+      width: 100px;
+      height: 100px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.5s;
+      border-radius: 8px;
+    }
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    /* Front and back faces of the card */
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      border-radius: 8px;
+    }
+    .card-face.front {
+      background: #2e3d49;
+      color: #fff;
+    }
+    .card-face.back {
+      background: #fff;
+      transform: rotateY(180deg);
+    }
+
+    /* Score and turn display */
+    .info {
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin: 10px;
+      padding: 5px 10px;
+    }</style></head> <body><h1>Memory Game</h1> <div class="info"><span id="player1-score">P1: 0</span> <span id="player2-score">P2: 0</span> <span>Turn: <span id="current-turn">1</span></span></div> <button id="restart-button">Restart</button> <div class="game-board" id="game-board"></div> <script>// -- Game Data & State --
+    const ICONS = ['🍎','🍌','🍇','🍓','🍒','🍍','🍋','🍉'];
+    let cardValues = [];          // shuffled array of pairs
+    let firstCard = null;         // first flipped card element
+    let secondCard = null;        // second flipped card element
+    let isCheckingMatch = false;  // lock during match check
+    let currentTurn = 1;          // 1 or 2
+    let scores = [0, 0];          // [player1Score, player2Score]
+
+    const boardEl = document.getElementById('game-board');
+    const p1ScoreEl = document.getElementById('player1-score');
+    const p2ScoreEl = document.getElementById('player2-score');
+    const turnEl    = document.getElementById('current-turn');
+    const restartBtn = document.getElementById('restart-button');
+
+    // -- Utility: Fisher–Yates shuffle --
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // -- Initialize or Restart the Game --
+    function initGame() {
+      // Reset state
+      cardValues = shuffleArray([...ICONS, ...ICONS]); // two of each
+      firstCard = null;
+      secondCard = null;
+      isCheckingMatch = false;
+      currentTurn = 1;
+      scores = [0, 0];
+
+      // Clear board & render new cards
+      boardEl.innerHTML = '';
+      cardValues.forEach((icon, index) => {
+        const cardEl = createCardElement(icon, index);
+        boardEl.appendChild(cardEl);
+      });
+
+      updateDisplay();
+    }
+
+    // -- Create one card DOM element --
+    function createCardElement(icon, index) {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.dataset.icon = icon;   // store value for match checking
+      card.dataset.index = index; // optional: identify card
+
+      // Inner wrapper that will flip
+      const inner = document.createElement('div');
+      inner.className = 'card-inner';
+
+      // Front face (question mark)
+      const front = document.createElement('div');
+      front.className = 'card-face front';
+      front.textContent = '?';
+
+      // Back face (icon)
+      const back = document.createElement('div');
+      back.className = 'card-face back';
+      back.textContent = icon;
+
+      inner.append(front, back);
+      card.appendChild(inner);
+
+      // Attach click handler
+      card.addEventListener('click', () => onCardClicked(card));
+
+      return card;
+    }
+
+    // -- Handle a card click --
+    function onCardClicked(card) {
+      // Ignore clicks while checking or on already flipped cards
+      if (isCheckingMatch || card.classList.contains('flipped')) {
+        return;
+      }
+
+      // Flip it
+      card.classList.add('flipped');
+
+      if (!firstCard) {
+        // First selection
+        firstCard = card;
+      } else {
+        // Second selection
+        secondCard = card;
+        isCheckingMatch = true;
+        checkForMatch();
+      }
+    }
+
+    // -- Compare the two flipped cards --
+    function checkForMatch() {
+      const isMatch = firstCard.dataset.icon === secondCard.dataset.icon;
+
+      if (isMatch) {
+        // Increase current player's score
+        scores[currentTurn - 1]++;
+        updateDisplay();
+        prepareNextTurn();
+      } else {
+        // Flip back after a short delay
+        setTimeout(() => {
+          firstCard.classList.remove('flipped');
+          secondCard.classList.remove('flipped');
+          prepareNextTurn();
+        }, 1000);
+      }
+    }
+
+    // -- Reset selections & switch turn --
+    function prepareNextTurn() {
+      firstCard = null;
+      secondCard = null;
+      isCheckingMatch = false;
+      currentTurn = currentTurn === 1 ? 2 : 1;
+      updateDisplay();
+    }
+
+    // -- Update score and turn in the UI --
+    function updateDisplay() {
+      p1ScoreEl.textContent = \`P1: \${scores[0]}\`;
+      p2ScoreEl.textContent = \`P2: \${scores[1]}\`;
+      turnEl.textContent    = currentTurn;
+    }
+
+    // -- Event Listeners --
+    restartBtn.addEventListener('click', initGame);
+    document.addEventListener('DOMContentLoaded', initGame);<\/script></body>`;return{c(){a=p("!DOCTYPE"),r=C(),t=p("html"),t.innerHTML=d,this.h()},l(e){a=l(e,"!DOCTYPE",{html:!0}),r=y(e),t=l(e,"HTML",{lang:!0,"data-svelte-h":!0}),g(t)!=="svelte-1ina1ih"&&(t.innerHTML=d),this.h()},h(){o(a,"html",""),o(t,"lang","en")},m(e,n){s(e,a,n),s(e,r,n),s(e,t,n)},p:c,i:c,o:c,d(e){e&&(i(a),i(r),i(t))}}}class E extends m{constructor(a){super(),h(this,a,null,b,u,{})}}export{E as component};
