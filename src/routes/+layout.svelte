@@ -23,23 +23,23 @@
 </script>
 
 <nav>
-	<a href="/" data-sveltekit-reload rel="noopener noreferrer">HEM</a>
+	<a href="/Repos_ws" data-sveltekit-reload rel="noopener noreferrer">HEM</a>
   </nav>
   
   <nav>
-	<a href="/photoapp" data-sveltekit-reload>PHOTOAPP</a>
+	<a href="/Repos_ws/photoapp" data-sveltekit-reload>PHOTOAPP</a>
   </nav>
   
   <nav>
-	<a href="/register" data-sveltekit-reload rel="noopener noreferrer">REGISTERRRR</a>
+	<a href="/Repos_ws/register" data-sveltekit-reload rel="noopener noreferrer">REGISTERRRR</a>
   </nav>
   
   <nav>
-	<a href="/login" data-sveltekit-reload rel="noopener noreferrer">LOGIN</a>
+	<a href="/Repos_ws/login" data-sveltekit-reload rel="noopener noreferrer">LOGIN</a>
   </nav>
   
   <nav>
-	<a href="/habit-tracker" data-sveltekit-reload rel="noopener noreferrer">HABIT TRACKER</a>
+	<a href="/Repos_ws/habit-tracker" data-sveltekit-reload rel="noopener noreferrer">HABIT TRACKER</a>
   </nav>
   
 <style>
